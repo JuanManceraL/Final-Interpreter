@@ -11,7 +11,7 @@ keywords = {
 }
 
 types = {
-    'int', 'float' #, 'bool'
+    'int', 'float'
 }
 
 libraries = {
@@ -51,7 +51,8 @@ tokens = (
     'IF',
     'ELSE',
     'VAL_BOOL',
-    'OP_BOOL'
+    'OP_BOOL',
+    'STRING'
 )
 
 # Regular expression rules for simple tokens
@@ -82,6 +83,9 @@ t_LIBRARIES = r'\b(?:' + '|'.join(libraries) + r')\b'
 t_DIRECTIVES = r'\b(?:' + '|'.join(directives) + r')\b'
 t_VAL_BOOL = r'\b(?:' + '|'.join(val_bool) + r')\b'
 t_OP_BOOL = r'(<=|>=|==|<|>)'
+
+t_STRING = r'\"([^\\\n]|(\\.))*?\"|\'([^\\\n]|(\\.))*?\''
+
 
 # A regular expression rule with some action code
 def t_NUMBER(t):
@@ -116,9 +120,68 @@ def t_eof(t):
 def reboot_counts():
     global Il_char
     Il_char = ""
-    #print("Vamo bien")
+
+def counting_tokens(txt):
+    lexer.input(txt)
+    tk_count = ""
+    desc = ""
+
+    cont = 0
+    keywords_set = set()
+    identifiers = set()
+    punctuation = set()
+    operators = set()
+    constants = set()
+    #literals = set()
+    directives = set()
+    strings = set()
+
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        #Keywords
+        if tok.type in {'PRINT', 'EXP', 'SQR', 'IF', 'ELSE', 'TYPE'}:
+            keywords_set.add(tok.value)
+        elif tok.type == 'IDENTIFIER' and tok.value not in keywords_set:
+            identifiers.add(tok.value)
+        #Punctuation
+        elif tok.type in {'LPAREN', 'RPAREN', 'OCURLB', 'CCURLB', 'SEMIC', 'NS'}:
+            punctuation.add(tok.value)
+        #Operators
+        elif tok.type in {'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS', 'OP_BOOL'}:
+            operators.add(tok.value)
+        elif tok.type in {'NUMBER', 'VAL_BOOL'}:
+            constants.add(tok.value)
+        elif tok.type in {'DIRECTIVES', 'LIBRARIES'}:
+            directives.add(tok.value)
+        elif tok.type == 'STRING':
+            strings.add(tok.value)
+        cont += 1
+        desc += f"Token N {cont} --> '{tok.value}' \t\tType: {tok.type} \n"
+
+    # Mostrar resultados
+    #print(f"Keyword: {' '.join(sorted(keywords_set))}")
+    #print(f"Identifier: {' '.join(sorted(identifiers))}")
+    #print(f"Punctuation: {' '.join(sorted(punctuation))}")
+    #print(f"Operator: {' '.join(sorted(operators))}")
+    #print(f"Constant: {' '.join(sorted(map(str, constants)))}")
+    #print(f"Directive: {' '.join(sorted(directives))}")
+    #print(f"Strings: {' '.join(sorted(strings))}")
+    #print(f"Conteo de tokens: {cont}")
+
+    tk_count += f"Keyword: {' '.join(sorted(keywords_set))}" + "\n"
+    tk_count += f"Identifier: {' '.join(sorted(identifiers))}" + "\n"
+    tk_count += f"Punctuation: {' '.join(sorted(punctuation))}" + "\n"
+    tk_count += f"Operator: {' '.join(sorted(operators))}" + "\n"
+    tk_count += f"Constant: {' '.join(sorted(map(str, constants)))}" + "\n"
+    tk_count += f"Directive: {' '.join(sorted(directives))}" + "\n"
+    tk_count += f"Strings: {' '.join(sorted(strings))}" + "\n"
+    tk_count += f"Conteo de tokens: {cont}" + "\n"
+    tk_count += "\n\nDescripcion de conteo de tokens:\n" + desc
+    return tk_count
+
 
 # Build the lexer
 lexer = lex.lex()
 #lexer.lineno = 0
-

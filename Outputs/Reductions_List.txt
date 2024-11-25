@@ -1,11 +1,4 @@
-V <- N 4.0
-F <- V 4.0
-T <- F 4.0
-E <- T 4.0
-P(S) <- Imprimiendo... Printf(4.0)
+P(S) <- Imprimiendo... Printf("ola ola cara de bola")
 S <- S(esp)
 C <- S
-D(S) <- int a;
-S <- S(esp)
-C <- C S
 P <- C

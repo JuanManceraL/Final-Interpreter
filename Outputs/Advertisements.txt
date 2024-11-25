@@ -1,2 +1,0 @@
-Declaración: a
-Syntax error in input!

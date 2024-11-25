@@ -1,7 +1,0 @@
-
-
-Tabla de Símbolos:
-Identificador   Tipo       Valor     
------------------------------------
-a               int        N/A       
------------------------------------

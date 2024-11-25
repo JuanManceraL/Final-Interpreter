@@ -1,0 +1,16 @@
+Keyword: printf
+Identifier: 
+Punctuation: ( ) ;
+Operator: 
+Constant: 
+Directive: 
+Strings: "ola ola cara de bola"
+Conteo de tokens: 5
+
+
+Descripcion de conteo de tokens:
+Token N 1 --> 'printf' 		Type: PRINT 
+Token N 2 --> '(' 		Type: LPAREN 
+Token N 3 --> '"ola ola cara de bola"' 		Type: STRING 
+Token N 4 --> ')' 		Type: RPAREN 
+Token N 5 --> ';' 		Type: SEMIC 

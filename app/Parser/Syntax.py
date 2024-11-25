@@ -148,7 +148,8 @@ def p_assignment(p):
             
 
 def p_print(p):
-    """prt  : PRINT LPAREN expression RPAREN SEMIC"""
+    """prt  : PRINT LPAREN expression RPAREN SEMIC
+            | PRINT LPAREN STRING RPAREN SEMIC"""
     saveMessages("Reduce", f"P(S) <- Imprimiendo... Printf({p[3]})")
     if ((if_List and if_List[-1] == "True") or not if_List):
         saveMessages("Prints", str(p[3]))
