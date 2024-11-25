@@ -77,20 +77,20 @@ def p_declaration(p):
     valid = True
     #Si ya se declaro dicha variable
     if var_name in symbol_table:
-        saveMessages("SemErr", f"Error: La variable '{var_name}' ya fue declarada.")
+        saveMessages("SemErr", f"Error: La variable '{var_name}' ya fue declarada. Linea {p.lineno(2)}. Posicion {p.lexpos(2)}")
         valid = False
         #raise SystemExit
     #Si además está haciendo una asignación
     if len(p) > 4 and p[3] == '=':
         message_red = f"D(S) <- {p[1]} {p[2]}{p[3]}{p[4]}{p[5]}"
         if p[4] == None:
-            saveMessages("SemErr", f"Error: No se puede asignar un valor nulo a una variable")
+            saveMessages("SemErr", f"Error: No se puede asignar un valor nulo a una variable. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
             valid = False
             #raise SystemExit
         elif (p[1] == 'int'):
             valueNum = abs(p[4])
             if (valueNum - int(valueNum) != 0):
-                saveMessages("SemErr", f"Error: No se puede asignar un flotante en una variable entera")
+                saveMessages("SemErr", f"Error: No se puede asignar un flotante en una variable entera. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
                 valid = False
                 #raise SystemExit
             else:
@@ -130,13 +130,13 @@ def p_assignment(p):
     saveMessages("Reduce", f"A(S) <- {p[1]}{p[2]}{p[3]}{p[4]}")
     var_name = p[1]
     if var_name not in symbol_table:
-        saveMessages("SemErr", f"Error: La variable '{var_name}' no está declarada.")
+        saveMessages("SemErr", f"Error: La variable '{var_name}' no está declarada. Linea {p.lineno(1)}. Posicion {p.lexpos(1)}")
         #raise SystemExit
     else:
         valueNum = abs(p[3])
         if (symbol_table[var_name]['Type'] == 'int'):
             if (valueNum - int(valueNum) != 0):
-                saveMessages("SemErr", f"Error: No se puede asignar un flotante en una variable entera. Linea {p.lineno(2)}. Posicion {p.lexpos(2)}")
+                saveMessages("SemErr", f"Error: No se puede asignar un flotante en una variable entera. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
             elif ((if_List and if_List[-1] == "True") or not if_List):
                 symbol_table[var_name]['Value'] = int(p[3])
                 saveMessages("Advertisements", f"Asignación: {var_name} = {int(p[3])}")
@@ -167,40 +167,49 @@ def p_if(p):
 #Syntax for summ
 def p_expression_plus(p):
     """expression   : expression PLUS term"""
-    if((p[1] != None) and ((p[3] != None))):
+    if(p[1] == None):
+        saveMessages("SemErr", f"Error: No se pueden sumar variables nulas. Linea {p.lineno(1)}. Posicion {p.lexpos(1)}")
+    elif(p[3] == None):
+        saveMessages("SemErr", f"Error: No se pueden sumar variables nulas. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
+        #raise SystemExit
+    else:
         p[0] = p[1] + p[3]
         saveMessages("Reduce", f"E <- {p[1]}{p[2]}{p[3]}")
-    else:
-        saveMessages("SemErr", f"Error: No se pueden sumar variables nulas")
-        #raise SystemExit
 
 def p_expression_minus(p):
     """expression   : expression MINUS term"""
-    if((p[1] != None) and ((p[3] != None))):
+    if(p[1] == None):
+        saveMessages("SemErr", f"Error: No se pueden restar variables nulas. Linea {p.lineno(1)}. Posicion {p.lexpos(1)}")
+    elif(p[3] == None):
+        saveMessages("SemErr", f"Error: No se pueden restar variables nulas. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
+        #raise SystemExit
+    else:
         p[0] = p[1] - p[3]
         saveMessages("Reduce", f"E <- {p[1]}{p[2]}{p[3]}")
-    else:
-        saveMessages("SemErr", f"Error: No se pueden restar variables nulas")
-        #raise SystemExit
     
 
 def p_term_times(p):
     """term : term TIMES factor"""
-    if((p[1] != None) and ((p[3] != None))):
+    if(p[1] == None):
+        saveMessages("SemErr", f"Error: No se pueden multiplicar variables nulas. Linea {p.lineno(1)}. Posicion {p.lexpos(1)}")
+    elif(p[3] == None):
+        saveMessages("SemErr", f"Error: No se pueden multiplicar variables nulas. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
+        #raise SystemExit
+    else:
         p[0] = p[1] * p[3]
         saveMessages("Reduce", f"T <- {p[1]} * {p[3]}")
-    else:
-        saveMessages("SemErr", f"Error: No se pueden multiplicar variables nulas")
-        #raise SystemExit
     
 
 def p_term_div(p):
     """term : term DIVIDE factor"""
-    if((p[1] != None) and ((p[3] != None))):
+    if(p[1] == None):
+        saveMessages("SemErr", f"Error: No se pueden dividir variables nulas. Linea {p.lineno(1)}. Posicion {p.lexpos(1)}")
+    elif(p[3] == None):
+        saveMessages("SemErr", f"Error: No se pueden dividir entre variables nulas. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
+        #raise SystemExit
+    else:
         p[0] = p[1] / p[3]
         saveMessages("Reduce", f"T <- {p[1]} / {p[3]}")
-    else:
-        saveMessages("SemErr", f"Error: No se pueden dividir variables nulas")
         #raise SystemExit
     
 def p_factor_exp(p):
@@ -210,7 +219,7 @@ def p_factor_exp(p):
         saveMessages("Reduce", f"F <- {p[1]}{p[2]}{p[3]} {p[4]}{p[5]}")
         p[0] = p[3]**p[4]
     else:
-        saveMessages("SemErr", f"Error: No se pueden elevar a la potencia variables nulas")
+        saveMessages("SemErr", f"Error: No se puedee elevar a una potencia variables nulas. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
         #raise SystemExit
     
 
@@ -221,7 +230,7 @@ def p_factor_sqr(p):
         saveMessages("Reduce", f"F <- {p[1]}{p[2]}{p[3]}{p[4]}")
         p[0] = math.sqrt(p[3])
     else:
-        saveMessages("SemErr", f"Error: No se pueden elevar a la potencia variables nulas")
+        saveMessages("SemErr", f"Error: No se puede calcular la raiz cuadrada de variables nulas. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
         #raise SystemExit
     
 
@@ -282,7 +291,7 @@ def p_factor_value(p):
     elif not str(p[1])[0].isnumeric():
         var_name = p[1]
         if not var_name in symbol_table:
-            saveMessages("SemErr", f"Error: La variable '{var_name}' no existe declarada.")
+            saveMessages("SemErr", f"Error: La variable '{var_name}' no existe declarada. Linea {p.lineno(1)}. Posicion {p.lexpos(1)}")
             #raise SystemExit
         else:
             ref_val = symbol_table[var_name]['Value']

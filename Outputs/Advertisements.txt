@@ -1,11 +1,1 @@
-Declaración y asignación: a = 1
-Declaración y asignación: b = 5
-Declaración y asignación: c = 6
-Declaración: x
-Declaración y asignación: decision = 1
-Elevando 5 a la 2.0 = 25.0
-Raiz cuadrada de 1.0 = 1.0
-Asignación: x = -2.0
-Elevando 5 a la 2.0 = 25.0
-Raiz cuadrada de 1.0 = 1.0
-Cierre de un if
+Elevando 2.0 a la 0.0 = 1.0
