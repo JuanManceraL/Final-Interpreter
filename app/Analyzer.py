@@ -35,11 +35,7 @@ def AnalyzeArchive(input_file_dir):
 def AnalyzeCode(txt):
     Syntax.rebootVariables()
     parser.parse(txt)
-
-    guardar_resultados("SymbolTable_Updates.txt", Syntax.Upd_ST)
-    guardar_resultados("Reductions_List.txt", Syntax.Reduces)
-    guardar_resultados("Advertisements.txt", Syntax.Adv)
-    guardar_resultados("Token_Count.txt", Lexer.Lexer.counting_tokens(txt))
+    infoInterr = ""
     global code_output
     global analysis_output
     global lex_output
@@ -50,10 +46,16 @@ def AnalyzeCode(txt):
         analysis_output = "Lexer error\n" + lex_output
         code_output = ""
     elif analysis_output == "Parsing Success!\nSDT Verified!":
-        if SDTOutput != "":        
+        if SDTOutput != "":
             analysis_output = "Parsing Success!\nSDT error...\n\n" + SDTOutput
             code_output = ""
+            infoInterr = "\n\n-Interrupción causada por error semántico-"
         else:
             code_output = Syntax.Output_Code
     else:
         code_output = ""
+
+    guardar_resultados("SymbolTable_Updates.txt", Syntax.Upd_ST + infoInterr)
+    guardar_resultados("Reductions_List.txt", Syntax.Reduces)
+    guardar_resultados("Advertisements.txt", Syntax.Adv + infoInterr)
+    guardar_resultados("Token_Count.txt", Lexer.Lexer.counting_tokens(txt))

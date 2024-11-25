@@ -110,8 +110,7 @@ t_ignore  = ' \t'
 def t_error(t):
     #print("Illegal character '%s'" % t.value[0])
     global Il_char
-    Il_char = f"Carácter ilegal {t.value[0]}"
-    print(Il_char)
+    Il_char += f"'{t.value[0]}' "
     t.lexer.skip(1)
 
 def t_eof(t):
@@ -123,8 +122,12 @@ def reboot_counts():
 
 def counting_tokens(txt):
     lexer.input(txt)
+    global tk_count
     tk_count = ""
     desc = ""
+
+    Il_Char_taken = Il_char
+    Error_Count = len(Il_Char_taken.split())
 
     cont = 0
     keywords_set = set()
@@ -132,7 +135,6 @@ def counting_tokens(txt):
     punctuation = set()
     operators = set()
     constants = set()
-    #literals = set()
     directives = set()
     strings = set()
 
@@ -159,17 +161,9 @@ def counting_tokens(txt):
             strings.add(tok.value)
         cont += 1
         desc += f"Token N {cont} --> '{tok.value}' \t\tType: {tok.type} \n"
-
-    # Mostrar resultados
-    #print(f"Keyword: {' '.join(sorted(keywords_set))}")
-    #print(f"Identifier: {' '.join(sorted(identifiers))}")
-    #print(f"Punctuation: {' '.join(sorted(punctuation))}")
-    #print(f"Operator: {' '.join(sorted(operators))}")
-    #print(f"Constant: {' '.join(sorted(map(str, constants)))}")
-    #print(f"Directive: {' '.join(sorted(directives))}")
-    #print(f"Strings: {' '.join(sorted(strings))}")
-    #print(f"Conteo de tokens: {cont}")
-
+    
+    #Guardar resultados
+    tk_count += f"------ Conteo de Tokens ------\n\n"
     tk_count += f"Keyword: {' '.join(sorted(keywords_set))}" + "\n"
     tk_count += f"Identifier: {' '.join(sorted(identifiers))}" + "\n"
     tk_count += f"Punctuation: {' '.join(sorted(punctuation))}" + "\n"
@@ -177,11 +171,13 @@ def counting_tokens(txt):
     tk_count += f"Constant: {' '.join(sorted(map(str, constants)))}" + "\n"
     tk_count += f"Directive: {' '.join(sorted(directives))}" + "\n"
     tk_count += f"Strings: {' '.join(sorted(strings))}" + "\n"
-    tk_count += f"Conteo de tokens: {cont}" + "\n"
-    tk_count += "\n\nDescripcion de conteo de tokens:\n" + desc
+    tk_count += f"Conteo de tokens clasificados: {cont}"
+    tk_count += f"\n-Caracteres Ilegales: {Il_Char_taken}"
+    tk_count += f"\n-Conteo de tokens no clasificados: {Error_Count}" + "\n"
+    tk_count += "\nDescripcion de conteo de tokens clasificados correctamente:\n" + desc
+
     return tk_count
 
 
 # Build the lexer
 lexer = lex.lex()
-#lexer.lineno = 0

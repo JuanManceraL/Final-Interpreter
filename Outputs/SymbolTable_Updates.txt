@@ -13,3 +13,6 @@ Identificador   Tipo       Valor
 a               int        5         
 b               int        2         
 -----------------------------------
+
+
+-Interrupción causada por error semántico-
