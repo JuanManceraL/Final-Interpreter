@@ -1,0 +1,56 @@
+
+
+Tabla de Símbolos:
+Identificador   Tipo       Valor     
+-----------------------------------
+a               int        1         
+-----------------------------------
+
+
+Tabla de Símbolos:
+Identificador   Tipo       Valor     
+-----------------------------------
+a               int        1         
+b               int        5         
+-----------------------------------
+
+
+Tabla de Símbolos:
+Identificador   Tipo       Valor     
+-----------------------------------
+a               int        1         
+b               int        5         
+c               int        6         
+-----------------------------------
+
+
+Tabla de Símbolos:
+Identificador   Tipo       Valor     
+-----------------------------------
+a               int        1         
+b               int        5         
+c               int        6         
+x               float      N/A       
+-----------------------------------
+
+
+Tabla de Símbolos:
+Identificador   Tipo       Valor     
+-----------------------------------
+a               int        1         
+b               int        5         
+c               int        6         
+x               float      N/A       
+decision        int        1         
+-----------------------------------
+
+
+Tabla de Símbolos:
+Identificador   Tipo       Valor     
+-----------------------------------
+a               int        1         
+b               int        5         
+c               int        6         
+x               float      -2.0      
+decision        int        1         
+-----------------------------------
