@@ -1,4 +1,1 @@
-#import UI.UI
-
-Lista = []
-
+import UI.UI
