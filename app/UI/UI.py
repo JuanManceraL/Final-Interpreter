@@ -126,8 +126,6 @@ def UpdateOutput():
     
     textOutput = Analyzer.code_output
     LabOut.config(text=textOutput)
-    #Asignar a la salida output el 
-    #Analyzer.code_output
 
 def ShowCommands():
     messagebox.showinfo("Funciones disponibles", """- printf: \nImprime numeros o cadenas de texto \nUso:\nprintf('Cadena de texto') || printf(3+5) || printf(variable)\n\n
@@ -141,16 +139,14 @@ def ShowInfoTeam():
 
 
 def showOutputs(textDir = None, title= None):
-    #textDir = "Reductions_List.txt"
     if (textDir == None) or (title == None):
         return
     textRed =  Outputs_dir / textDir
     if not Path(textRed).is_file():
         messagebox.showwarning("Error", "No se ha encontrado el archivo de salida seleccionado. \nFavor de ejecutar al menos un código")
         return
-    #print(textRed)
     root = Tk()
-    root.title(title)#"Reductions"
+    root.title(title)
     root.resizable(True, True)
     root.geometry('600x250')
     root.config(bg=colour1)
@@ -174,7 +170,6 @@ raiz = Tk()
 raiz.title("Code Editor - Interpreter - CPY - Team 05")
 raiz.resizable(True, True)
 raiz.iconbitmap(UI_dir / "Image_icon.ico")
-#raiz.geometry('800x400')
 raiz.geometry("850x750")
 raiz.config(bg=colour1)
 
@@ -193,7 +188,6 @@ Box_code = ScrolledText(Frame1, width=70, height=27)
 Box_code.config(background=colour6, foreground='WHITE')
 Box_code.grid(row=2, column=0, padx=10, pady=10)
 Box_code.insert("1.0", "Escribe tu codigo aqui")
-#Box_code.config(state="disabled")
 
 CodeLabel=Label(Frame1, text="Salida analisis: ", background="#05242B", foreground='WHITE', font=('Arial', 10, 'bold'))
 CodeLabel.grid(row=3, column=0, padx=10, pady=5, sticky="w")
@@ -256,12 +250,11 @@ LabB6=Label(Frame2)
 LabB6.config(background=colour1, text="Salida:", foreground=colour2, font=('Arial', 10, 'bold'))
 LabB6.grid(row=10, column=0, padx=10, pady=2)
 
-#txt_Output=''
 LabOut=Label(Frame2)
 LabOut.config(background=colour1, text="", width=width_buttons+5, wraplength=180, foreground=colour2, font=('Arial', 10, 'bold'))
 LabOut.grid(row=11, column=0, padx=10, pady=2)
 
-    #Menu
+#Menu
 barraMenu = Menu(raiz)
 raiz.config(menu=barraMenu)
 

@@ -26,16 +26,10 @@ conj_if = ""
 desc = ""
 if_List = []
 
-
-#def leer_archivo(ruta_archivo):
-#    with open(ruta_archivo, 'r') as archivo:
-#        return archivo.read()
-
 def p_program(p):
     """program  : code
                 | """
     saveMessages("Reduce", "P <- C")
-    #print("Nuevo conjunto de programa")
     global if_List
     if if_List:
         prev = if_List.pop()
@@ -45,7 +39,6 @@ def p_program(p):
             if_List.append("True")
         else:
             if_List.append("Ignore")
-        #print(f"Previo: {prev}")
 
 
 def p_code(p):
@@ -96,27 +89,13 @@ def p_declaration(p):
             else:
                 value_st = int(p[4])
                 message_adv = f"Declaración y asignación: {var_name} = {int(p[4])}"
-                #message_red = f"D(S) <- {p[1]} {p[2]}{p[3]}{p[4]}{p[5]}"
-                #symbol_table[var_name] = {'Identifier': var_name, 'Type': var_type, 'Value': int(p[4])}
-                #saveMessages("Advertisements",f"Declaración y asignación: {var_name} = {int(p[4])}")
-                #saveMessages("Reduce", f"D(S) <- {p[1]} {p[2]}{p[3]}{p[4]}{p[5]}")
-                #print_symbol_table()
         else:
             value_st = p[4]
             message_adv = f"Declaración y asignación: {var_name} = {p[4]}"
-            #message_red = f"D(S) <- {p[1]} {p[2]}{p[3]}{p[4]}{p[5]}"
-            #symbol_table[var_name] = {'Identifier': var_name, 'Type': var_type, 'Value': p[4]}
-            #saveMessages("Advertisements", f"Declaración y asignación: {var_name} = {p[4]}")
-            #saveMessages("Reduce", f"D(S) <- {p[1]} {p[2]}{p[3]}{p[4]}{p[5]}")
-            #print_symbol_table() 
     else:
         value_st = None
         message_adv = f"Declaración: {var_name}"
         message_red = f"D(S) <- {p[1]} {p[2]}{p[3]}"
-        #symbol_table[var_name] = {'Identifier': var_name, 'Type': var_type, 'Value': None}
-        #saveMessages("Advertisements", f"Declaración: {var_name}")
-        #saveMessages("Reduce", f"D(S) <- {p[1]} {p[2]}{p[3]}")
-        #print_symbol_table()
     
     saveMessages("Reduce", message_red)
     #Guardar variable, guardar mensajes y imprimir tabla de simbolos
@@ -170,10 +149,7 @@ def p_if(p):
             | IF LPAREN valbool RPAREN OCURLB program CCURLB ELSE OCURLB program CCURLB"""
     saveMessages("Advertisements", "Cierre de un if")
     saveMessages("Reduce", f"ifst(S) <- {p[1]}{p[2]}{p[3]}{p[4]}")
-    #if ((if_List and if_List[-1] == "True") or not if_List):
     if_List.pop()
-
-    #print("Andamos ifeando")
 
 #Syntax for summ
 def p_expression_plus(p):
@@ -233,7 +209,6 @@ def p_factor_exp(p):
         saveMessages("SemErr", f"Error: No se puedee elevar a una potencia variables nulas. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
         #raise SystemExit
     
-
 def p_factor_sqr(p):
     """factor : SQR LPAREN factor RPAREN"""
     if(p[3] != None):
@@ -269,10 +244,9 @@ def p_value_bool(p):
         Val = p[2]
     p[0] = Val
     saveMessages("Reduce", f"V <- B {Val}")
-    #print("Valuación de booleano")
+    #print("Valuación de un booleano")
     if ((if_List and if_List[-1] == "True") or not if_List):
         conj_if = str(Val)
-        #global if_List
         if_List.append(conj_if)
     else:
         if_List.append("Ignore")
