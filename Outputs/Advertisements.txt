@@ -1,1 +1,2 @@
-Elevando 2.0 a la 0.0 = 1.0
+Declaración: a
+Syntax error in input!

@@ -309,12 +309,12 @@ def p_error(p):
     print("SDT error...\n")
     if p:
         tok = parser.token()
-        print(f"Error de sintaxis en '{p.value}'  '{p.type}'    '{parser.token()}'")
-        Output_SDT = f"Parsing error...\nSDT error...\n\nError de sintaxis en '{p.value}', no se espera un token de tipo '{p.type}'"
+        #print(f"Error de sintaxis en '{p.value}'  '{p.type}'    '{parser.token()}'")
+        Output_SDT = f"Parsing error...\nSDT error...\n\nError de sintaxis en '{p.value}' en la linea {p.lineno}, no se espera un token de tipo '{p.type}'"
         return
         #raise SystemExit
     else:
-        print("Error de sintaxis al final de la entrada")
+        #print("Error de sintaxis al final de la entrada")
         Output_SDT = f"Parsing error...\nSDT error...\n\nError de sintaxis al final de la entrada"
         return
         #raise SystemExit

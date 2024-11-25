@@ -42,14 +42,17 @@ def AnalyzeArchive(input_file_dir):
     analysis_output = Syntax.Output_SDT
     SDTOutput = Syntax.Semantic_Errors
     lex_output = Lexer.Lexer.Il_char
-
     if lex_output != "":
         analysis_output = "Lexer error\n" + lex_output
-    elif analysis_output == "Parsing Success!\nSDT Verified!" and SDTOutput != "":
-        analysis_output = "Parsing Success!\nSDT error...\n\n" + SDTOutput
+        code_output = ""
+    elif analysis_output == "Parsing Success!\nSDT Verified!":
+        if SDTOutput != "":        
+            analysis_output = "Parsing Success!\nSDT error...\n\n" + SDTOutput
+            code_output = ""
+        else:
+            code_output = Syntax.Output_Code
     else:
-        code_output = Syntax.Output_Code
-        #print(code_output)
+        code_output = ""
 
 
 # Ejecutar el analizador
@@ -70,11 +73,12 @@ def AnalyzeCode(txt):
     lex_output = Lexer.Lexer.Il_char
     if lex_output != "":
         analysis_output = "Lexer error\n" + lex_output
-    elif analysis_output == "Parsing Success!\nSDT Verified!" and SDTOutput != "":
-        analysis_output = "Parsing Success!\nSDT error...\n\n" + SDTOutput
         code_output = ""
+    elif analysis_output == "Parsing Success!\nSDT Verified!":
+        if SDTOutput != "":        
+            analysis_output = "Parsing Success!\nSDT error...\n\n" + SDTOutput
+            code_output = ""
+        else:
+            code_output = Syntax.Output_Code
     else:
-        code_output = Syntax.Output_Code
-        #print(code_output)
-    #print(Syntax.Semantic_Errors)
-
+        code_output = ""
