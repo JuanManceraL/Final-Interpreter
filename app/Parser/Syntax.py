@@ -136,7 +136,7 @@ def p_assignment(p):
         valueNum = abs(p[3])
         if (symbol_table[var_name]['Type'] == 'int'):
             if (valueNum - int(valueNum) != 0):
-                saveMessages("SemErr", f"Error: No se puede asignar un flotante en una variable entera. Linea {p.lineno(3)}. Posicion {p.lexpos(3)}")
+                saveMessages("SemErr", f"Error: No se puede asignar un flotante en una variable entera. Linea {p.lineno(1)}. Posicion {p.lexpos(1)}")
             elif ((if_List and if_List[-1] == "True") or not if_List):
                 symbol_table[var_name]['Value'] = int(p[3])
                 saveMessages("Advertisements", f"Asignación: {var_name} = {int(p[3])}")
@@ -316,7 +316,7 @@ def p_error(p):
         #raise SystemExit
     else:
         #print("Error de sintaxis al final de la entrada")
-        Output_SDT = f"Parsing error...\nSDT error...\n\nError de sintaxis al final de la entrada"
+        Output_SDT = f"Parsing error...\nSDT error...\n\nError de sintaxis al final de la entrada."
         return
         #raise SystemExit
 

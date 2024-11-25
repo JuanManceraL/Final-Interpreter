@@ -1,16 +1,32 @@
-Keyword: printf
-Identifier: 
+Keyword: int printf
+Identifier: a b
 Punctuation: ( ) ;
-Operator: 
-Constant: 
+Operator: / =
+Constant: 2.0 5.0
 Directive: 
-Strings: "ola ola cara de bola"
-Conteo de tokens: 5
+Strings: 
+Conteo de tokens: 21
 
 
 Descripcion de conteo de tokens:
-Token N 1 --> 'printf' 		Type: PRINT 
-Token N 2 --> '(' 		Type: LPAREN 
-Token N 3 --> '"ola ola cara de bola"' 		Type: STRING 
-Token N 4 --> ')' 		Type: RPAREN 
+Token N 1 --> 'int' 		Type: TYPE 
+Token N 2 --> 'a' 		Type: IDENTIFIER 
+Token N 3 --> '=' 		Type: EQUALS 
+Token N 4 --> '5.0' 		Type: NUMBER 
 Token N 5 --> ';' 		Type: SEMIC 
+Token N 6 --> 'int' 		Type: TYPE 
+Token N 7 --> 'b' 		Type: IDENTIFIER 
+Token N 8 --> '=' 		Type: EQUALS 
+Token N 9 --> '2.0' 		Type: NUMBER 
+Token N 10 --> ';' 		Type: SEMIC 
+Token N 11 --> 'b' 		Type: IDENTIFIER 
+Token N 12 --> '=' 		Type: EQUALS 
+Token N 13 --> 'b' 		Type: IDENTIFIER 
+Token N 14 --> '/' 		Type: DIVIDE 
+Token N 15 --> '5.0' 		Type: NUMBER 
+Token N 16 --> ';' 		Type: SEMIC 
+Token N 17 --> 'printf' 		Type: PRINT 
+Token N 18 --> '(' 		Type: LPAREN 
+Token N 19 --> 'b' 		Type: IDENTIFIER 
+Token N 20 --> ')' 		Type: RPAREN 
+Token N 21 --> ';' 		Type: SEMIC 

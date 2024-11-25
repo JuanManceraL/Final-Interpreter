@@ -46,21 +46,21 @@ def AnalyzeScript(ExampleNum = None):
         archivo = filedialog.askopenfilename()
     else:
         if ExampleNum == 0:
-            archivo = Examples_dir / "ejemplo0.c"
+            archivo = Examples_dir / "ejemplo0.cpy"
         elif ExampleNum == 1:
-            archivo = Examples_dir / "ejemplo1.c"
+            archivo = Examples_dir / "ejemplo1.cpy"
         elif ExampleNum == 2:
-            archivo = Examples_dir / "ejemplo2.c"
+            archivo = Examples_dir / "ejemplo2.cpy"
         elif ExampleNum == 3:
-            archivo = Examples_dir / "ejemplo3.c"
+            archivo = Examples_dir / "ejemplo3.cpy"
         elif ExampleNum == 4:
-            archivo = Examples_dir / "ejemploE0.c"
+            archivo = Examples_dir / "ejemploE0.cpy"
         elif ExampleNum == 5:
-            archivo = Examples_dir / "ejemploE1.c"
+            archivo = Examples_dir / "ejemploE1.cpy"
         elif ExampleNum == 6:
-            archivo = Examples_dir / "ejemploE2.c"
+            archivo = Examples_dir / "ejemploE2.cpy"
         elif ExampleNum == 7:
-            archivo = Examples_dir / "ejemploE3.c"
+            archivo = Examples_dir / "ejemploE3.cpy"
     if not archivo:
         return
     #Analyzer.AnalyzeArchive(archivo)
@@ -95,7 +95,7 @@ def LoadCode():
 
 def SaveCodeAs():
     global prevName
-    archivo = filedialog.asksaveasfile(defaultextension='.txt', filetypes=[ ('Archivo de texto','.txt'), ('Archivo C','.c'), ('Todos los archivos','.*') ])
+    archivo = filedialog.asksaveasfile(defaultextension='.cpy', filetypes=[('Archivo CPY','.cpy'), ('Archivo de texto','.txt'), ('Archivo C','.c'), ('Todos los archivos','.*') ])
     if archivo is None:
         return
     prevName = archivo.name

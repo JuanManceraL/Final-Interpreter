@@ -1,4 +1,30 @@
-P(S) <- Imprimiendo... Printf("ola ola cara de bola")
+V <- N 5.0
+F <- V 5.0
+T <- F 5.0
+E <- T 5.0
+D(S) <- int a=5.0;
 S <- S(esp)
 C <- S
+V <- N 2.0
+F <- V 2.0
+T <- F 2.0
+E <- T 2.0
+D(S) <- int b=2.0;
+S <- S(esp)
+C <- C S
+F <- Var_val 2
+T <- F 2
+V <- N 5.0
+F <- V 5.0
+T <- 2 / 5.0
+E <- T 0.4
+A(S) <- b=0.4;
+S <- S(esp)
+C <- C S
+F <- Var_val 2
+T <- F 2
+E <- T 2
+P(S) <- Imprimiendo... Printf(2)
+S <- S(esp)
+C <- C S
 P <- C
