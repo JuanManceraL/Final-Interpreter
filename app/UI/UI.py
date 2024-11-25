@@ -43,8 +43,10 @@ def AnalyzeCode():
     UpdateOutput()
 
 def AnalyzeScript(ExampleNum = None):
+    global prevName
     if ExampleNum == None:
         archivo = filedialog.askopenfilename()
+        prevName = archivo
     else:
         if ExampleNum == 0:
             archivo = Examples_dir / "ejemplo0.cpy"
@@ -62,27 +64,14 @@ def AnalyzeScript(ExampleNum = None):
             archivo = Examples_dir / "ejemploE2.cpy"
         elif ExampleNum == 7:
             archivo = Examples_dir / "ejemploE3.cpy"
+        prevName = "a"
     if not archivo:
+        prevName = "a"
         return
-    #Analyzer.AnalyzeArchive(archivo)
-    #prevName = archivo
     Box_code.delete("1.0", "end")
     with open(archivo, 'r') as file:
         Box_code.insert("1.0", file.read())
     AnalyzeCode()
-    #Analyzer.AnalyzeCode(archivoTexto)
-    #UpdateOutput()
-
-def AnalizeExample(ExampleNum):
-    archivo = ExampleNum
-    if not archivo:
-        return
-    Analyzer.AnalizeArchive(archivo)
-    prevName = archivo
-    Box_code.delete("1.0", "end")
-    with open(archivo, 'r') as file:
-        Box_code.insert("1.0", file.read())
-    UpdateOutput()
 
 def LoadCode():
     global prevName
@@ -137,38 +126,14 @@ def UpdateOutput():
     #Analyzer.code_output
 
 def ShowCommands():
-    messagebox.showinfo("Comandos disponibles", "print()  if(){}  if(){}else{} \ndeclaracion int a = 10;")
+    messagebox.showinfo("Funciones disponibles", """- printf: \nImprime numeros o cadenas de texto \nUso:\nprintf('Cadena de texto') || printf(3+5) || printf(variable)\n\n
+- if: \nPermite solo ejecutar ciertos segmentos de código a partir de una condición \nUso:\nif(condicion)\n{codigo_a_realizar} || \n\nif(condicion)\n{codigo_a_realizar}\nelse\n{codigo_a_realizar_en_caso_contrario}""")
 
 def ShowRequeriments():
-    messagebox.showinfo("Requeriments", "Libraries: \ntkinter\ntime\npathlib\nmath\nply")
+    messagebox.showinfo("Información del entorno", "Información del entorno de ejecución en el que fue creado este proyecto: \n\nPython 3.10.4\n\ntkinter == 8.6\nply == 3.11")
 
 def ShowInfoTeam():
-    messagebox.showinfo("Team Info", "Lexel / Syntatic / Semantic - Analyzer - Team 05") #\nJuan M\nDaniela M\nAngel R\n
-
-#def showReductions():
-#    textRed =  Outputs_dir / "Reductions_List.txt"
-#    #archivo = Examples_dir / "ejemploE3.cpy"
-#    #if textRed == "":
-#    #    return
-#    root = Tk()
-#    root.title("Reductions")
-#    root.resizable(True, True)
-#    root.geometry('600x250')
-#    root.config(bg=colour1)
-
-#    FrameR = Frame(root, background="#05242B")
-#    FrameR.grid(row=0,column=0)
-    
-#    #RedLabel=Label(Frame1, text=textRed)
-#    #RedLabel.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-#    Red_text = ScrolledText(FrameR, width=70, height=14)
-#    Red_text.config(background=colour6, foreground='WHITE')
-#    Red_text.grid(row=2, column=0, padx=10, pady=10)
-#    Red_text.insert("1.0", "No se ha analizado ningún código")
-#    Red_text.delete("1.0", "end")
-#    with open(textRed, 'r') as file:
-#        Red_text.insert("1.0", file.read())
-#    Red_text.config(state="disabled")
+    messagebox.showinfo("Team Info", "Code editor for language CPY\nInterpreter - Team 05 \nLexel / Syntatic / Semantic - Analyzer") #\nJuan M\nDaniela M\nAngel R\n
 
 
 def showOutputs(textDir = None, title= None):
@@ -202,7 +167,7 @@ def showOutputs(textDir = None, title= None):
 
 #raiz
 raiz = Tk()
-raiz.title("Lexel / Syntatic / Semantic - Analyzer - Team 05")
+raiz.title("Code Editor - Interpreter - CPY - Team 05")
 raiz.resizable(True, True)
 raiz.iconbitmap(UI_dir / "Image_icon.ico")
 #raiz.geometry('800x400')
@@ -326,8 +291,8 @@ outputsMenu.add_command(label="Actualizacion de tabla de simbolos", command=lamb
 outputsMenu.add_command(label="Registro de eventos", command=lambda: showOutputs("Advertisements.txt", "Registro de eventos"))
 
 ayudaMenu = Menu(barraMenu,  tearoff=0)
-ayudaMenu.add_command(label="Comandos disponibles", command=ShowCommands)
-ayudaMenu.add_command(label="Requerimientos", command=ShowRequeriments)
+ayudaMenu.add_command(label="Funciones disponibles", command=ShowCommands)
+ayudaMenu.add_command(label="Información del entorno", command=ShowRequeriments)
 ayudaMenu.add_command(label="Información fabricante", command=ShowInfoTeam)
 
 barraMenu.add_cascade(label="Archivo", menu = archivoMenu)

@@ -1,5 +1,1 @@
-Declaración y asignación: a = 5
-Declaración y asignación: b = 2
-
-
--Interrupción causada por error semántico-
+Declaración y asignación: c = 5
