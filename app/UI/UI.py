@@ -18,6 +18,7 @@ import Analyzer
 UI_dir = Path(__file__).parent
 app_dir = UI_dir.parent.parent
 Examples_dir = app_dir / "Examples"
+Outputs_dir = app_dir / "Outputs"
 
 prevName = "a"
 pad_x_buttons = 7
@@ -144,26 +145,60 @@ def ShowRequeriments():
 def ShowInfoTeam():
     messagebox.showinfo("Team Info", "Lexel / Syntatic / Semantic - Analyzer - Team 05") #\nJuan M\nDaniela M\nAngel R\n
 
-def showReductions():
-    textRed =  Analyzer.path_Reduction
-    if textRed == "":
+#def showReductions():
+#    textRed =  Outputs_dir / "Reductions_List.txt"
+#    #archivo = Examples_dir / "ejemploE3.cpy"
+#    #if textRed == "":
+#    #    return
+#    root = Tk()
+#    root.title("Reductions")
+#    root.resizable(True, True)
+#    root.geometry('600x250')
+#    root.config(bg=colour1)
+
+#    FrameR = Frame(root, background="#05242B")
+#    FrameR.grid(row=0,column=0)
+    
+#    #RedLabel=Label(Frame1, text=textRed)
+#    #RedLabel.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+#    Red_text = ScrolledText(FrameR, width=70, height=14)
+#    Red_text.config(background=colour6, foreground='WHITE')
+#    Red_text.grid(row=2, column=0, padx=10, pady=10)
+#    Red_text.insert("1.0", "No se ha analizado ningún código")
+#    Red_text.delete("1.0", "end")
+#    with open(textRed, 'r') as file:
+#        Red_text.insert("1.0", file.read())
+#    Red_text.config(state="disabled")
+
+
+def showOutputs(textDir = None, title= None):
+    #textDir = "Reductions_List.txt"
+    if (textDir == None) or (title == None):
         return
-
+    textRed =  Outputs_dir / textDir
+    if not Path(textRed).is_file():
+        messagebox.showwarning("Error", "No se ha encontrado el archivo de salida seleccionado. \nFavor de ejecutar al menos un código")
+        return
+    #print(textRed)
     root = Tk()
-    root.title("Reductions")
+    root.title(title)#"Reductions"
     root.resizable(True, True)
-    root.geometry('300x600')
+    root.geometry('600x250')
+    root.config(bg=colour1)
 
-    FrameR = Frame(root)
+    FrameR = Frame(root, background="#05242B")
     FrameR.grid(row=0,column=0)
     
-    #RedLabel=Label(Frame1, text=textRed)
-    #RedLabel.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    Red_text = ScrolledText(FrameR, width=70, height=30)
+    Output_text = ScrolledText(FrameR, width=70, height=14)
+    Output_text.config(background=colour6, foreground='WHITE')
+    Output_text.grid(row=2, column=0, padx=10, pady=10)
+    Output_text.insert("1.0", "No se ha analizado ningún código")
+    Output_text.delete("1.0", "end")
     with open(textRed, 'r') as file:
-        Red_text.insert("1.0", file.read())
-
-
+        Output_text.insert("1.0", file.read())
+    if Output_text.get(1.0, END) == "\n":
+        Output_text.insert("1.0", "No se ha hecho ninguna reducción")
+    Output_text.config(state="disabled")
 
 #raiz
 raiz = Tk()
@@ -284,17 +319,21 @@ herramientasMenu.add_command(label="Cortar", command=Cut)
 herramientasMenu.add_command(label="Copiar", command=Copy)
 herramientasMenu.add_command(label="Pegar", command=Paste)
 
+outputsMenu = Menu(barraMenu, tearoff=0)
+outputsMenu.add_command(label="Conteo de tokens", command=lambda: showOutputs("Token_Count.txt", "Conteo de Tokens"))
+outputsMenu.add_command(label="Muestra de reducciones", command=lambda: showOutputs("Reductions_List.txt", "Reducciones"))
+outputsMenu.add_command(label="Actualizacion de tabla de simbolos", command=lambda: showOutputs("SymbolTable_Updates.txt", "Actualizaciones de Tabla de Símbolos"))
+outputsMenu.add_command(label="Registro de eventos", command=lambda: showOutputs("Advertisements.txt", "Registro de eventos"))
+
 ayudaMenu = Menu(barraMenu,  tearoff=0)
 ayudaMenu.add_command(label="Comandos disponibles", command=ShowCommands)
 ayudaMenu.add_command(label="Requerimientos", command=ShowRequeriments)
 ayudaMenu.add_command(label="Información fabricante", command=ShowInfoTeam)
 
-#ReductionMenu = Menu(barraMenu, tearoff=0)
-#ReductionMenu.add_command(label="Last Reduction", command=showReductions)
-
 barraMenu.add_cascade(label="Archivo", menu = archivoMenu)
 barraMenu.add_cascade(label="Ejemplos", menu = ejemplosMenu)
 barraMenu.add_cascade(label="Herramientas", menu = herramientasMenu)
+barraMenu.add_cascade(label="Últimas salidas", menu = outputsMenu)
 barraMenu.add_cascade(label="Ayuda", menu = ayudaMenu)
-#barraMenu.add_cascade(label="Last Reduction", menu = ReductionMenu)
+
 raiz.mainloop()

@@ -14,17 +14,12 @@ S <- S(esp)
 C <- C S
 F <- Var_val 2
 T <- F 2
-V <- N 5.0
-F <- V 5.0
-T <- 2 / 5.0
-E <- T 0.4
-A(S) <- b=0.4;
-S <- S(esp)
-C <- C S
-F <- Var_val 2
-T <- F 2
 E <- T 2
-P(S) <- Imprimiendo... Printf(2)
+V <- N 0.2
+F <- V 0.2
+T <- F 0.2
+E <- 2+0.2
+A(S) <- b=2.2;
 S <- S(esp)
 C <- C S
 P <- C
