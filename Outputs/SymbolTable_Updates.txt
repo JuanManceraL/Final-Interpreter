@@ -1,7 +1,0 @@
-
-
-Tabla de Símbolos:
-Identificador   Tipo       Valor     
------------------------------------
-c               int        5         
------------------------------------

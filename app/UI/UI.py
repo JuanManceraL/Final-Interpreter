@@ -57,12 +57,16 @@ def AnalyzeScript(ExampleNum = None):
         elif ExampleNum == 3:
             archivo = Examples_dir / "ejemplo3.cpy"
         elif ExampleNum == 4:
-            archivo = Examples_dir / "ejemploE0.cpy"
+            archivo = Examples_dir / "ejemploprt.cpy"
         elif ExampleNum == 5:
-            archivo = Examples_dir / "ejemploE1.cpy"
+            archivo = Examples_dir / "ejemplo5.cpy"
         elif ExampleNum == 6:
-            archivo = Examples_dir / "ejemploE2.cpy"
+            archivo = Examples_dir / "ejemploE0.cpy"
         elif ExampleNum == 7:
+            archivo = Examples_dir / "ejemploE1.cpy"
+        elif ExampleNum == 8:
+            archivo = Examples_dir / "ejemploE2.cpy"
+        elif ExampleNum == 9:
             archivo = Examples_dir / "ejemploE3.cpy"
         prevName = "a"
     if not archivo:
@@ -273,11 +277,13 @@ ejemplosMenu.add_command(label="Ejemplo 0", command=lambda: AnalyzeScript(0))
 ejemplosMenu.add_command(label="Ejemplo 1", command=lambda: AnalyzeScript(1))
 ejemplosMenu.add_command(label="Ejemplo 2", command=lambda: AnalyzeScript(2))
 ejemplosMenu.add_command(label="Ejemplo 3", command=lambda: AnalyzeScript(3))
+ejemplosMenu.add_command(label="Ejemplo 4", command=lambda: AnalyzeScript(4))
+ejemplosMenu.add_command(label="Ejemplo 5", command=lambda: AnalyzeScript(5))
 ejemplosMenu.add_separator()
-ejemplosMenu.add_command(label="Ejemplo error 0", command=lambda: AnalyzeScript(4))
-ejemplosMenu.add_command(label="Ejemplo error 1", command=lambda: AnalyzeScript(5))
-ejemplosMenu.add_command(label="Ejemplo error 2", command=lambda: AnalyzeScript(6))
-ejemplosMenu.add_command(label="Ejemplo error 3", command=lambda: AnalyzeScript(7))
+ejemplosMenu.add_command(label="Ejemplo error 0", command=lambda: AnalyzeScript(6))
+ejemplosMenu.add_command(label="Ejemplo error 1", command=lambda: AnalyzeScript(7))
+ejemplosMenu.add_command(label="Ejemplo error 2", command=lambda: AnalyzeScript(8))
+ejemplosMenu.add_command(label="Ejemplo error 3", command=lambda: AnalyzeScript(9))
 
 herramientasMenu = Menu(barraMenu, tearoff=0)
 herramientasMenu.add_command(label="Cortar", command=Cut)

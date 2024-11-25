@@ -1,1 +1,0 @@
-Declaración y asignación: c = 5

@@ -152,7 +152,17 @@ def p_print(p):
             | PRINT LPAREN STRING RPAREN SEMIC"""
     saveMessages("Reduce", f"P(S) <- Imprimiendo... Printf({p[3]})")
     if ((if_List and if_List[-1] == "True") or not if_List):
-        saveMessages("Prints", str(p[3]))
+        show = str(p[3])
+        if show[0] == '"':
+            show = show.replace('"', '')
+        elif show[0] == "'":
+            show = show.replace("'", '')
+        else:
+            show = p[3]
+            show = round(show, 3)
+            show = str(p[3])
+        
+        saveMessages("Prints", show)
     #p[0] = p[1]
 
 def p_if(p):

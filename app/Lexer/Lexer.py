@@ -7,7 +7,7 @@ def leer_archivo(ruta_archivo):
         return archivo.read()
 
 keywords = {
-    'else', 'float', 'if', 'int', 'void', 'printf','exp', 'sqr'
+    'else', 'float', 'if', 'int', 'printf','exp', 'sqr'
 }
 
 types = {
